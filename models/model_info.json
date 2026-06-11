@@ -1,0 +1,33 @@
+{
+  "problem_type": "inverse_multi_output_regression",
+  "input_features": [
+    "Strength"
+  ],
+  "output_features": [
+    "Cement",
+    "Blast Furnace Slag",
+    "Fly Ash",
+    "Water",
+    "Superplasticizer",
+    "Coarse Aggregate",
+    "Fine Aggregate",
+    "Age"
+  ],
+  "best_model": "Random Forest Tuned",
+  "metrics": {
+    "model": "Random Forest Tuned",
+    "r2": 0.07491506196861193,
+    "mae": 48.43634495654263,
+    "rmse": 67.53511785298085,
+    "mape": 8300910.684665827
+  },
+  "trained_rows": 1005,
+  "test_size": 0.2,
+  "random_state": 42,
+  "available_optional_libraries": {
+    "xgboost": false,
+    "lightgbm": false,
+    "catboost": false,
+    "shap": false
+  }
+}
