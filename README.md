@@ -22,7 +22,7 @@ This project addresses that challenge by:
 * Demonstrating how Machine Learning can solve real-world civil engineering problems.
 * Offering a scalable web platform accessible from anywhere.
 
-By entering a target compressive strength, users receive predictions for the following ratios (relative to cement weight):
+By entering a target compressive strength, users receive predictions for the weight fraction of each ingredient in the total mix:
 
 * Cement
 * Blast Furnace Slag

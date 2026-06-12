@@ -3,7 +3,7 @@ import { Activity, BarChart3, Clock, User } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { useAuth } from "../contexts/AuthContext";
 import { api } from "../lib/api";
-import { toRatio } from "../lib/utils";
+import { toFraction } from "../lib/utils";
 import type { HistoryItem } from "../types/api";
 
 export default function DashboardPage() {
@@ -23,8 +23,11 @@ export default function DashboardPage() {
         <h2 className="mb-4 font-bold">Recent Predictions</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="text-slate-500"><tr><th className="py-2">Strength</th><th>Cement Ratio</th><th>Water Ratio</th><th>Date</th></tr></thead>
-            <tbody>{history.slice(0, 6).map((item) => <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3">{item.strength_input}</td><td>{toRatio(item.predicted_cement, item.predicted_cement)}</td><td>{toRatio(item.predicted_water, item.predicted_cement)}</td><td>{new Date(item.created_at).toLocaleString()}</td></tr>)}</tbody>
+            <thead className="text-slate-500"><tr><th className="py-2">Strength</th><th>Cement Fraction</th><th>Water Fraction</th><th>Date</th></tr></thead>
+            <tbody>{history.slice(0, 6).map((item) => {
+              const total = item.predicted_cement + item.predicted_blast_furnace_slag + item.predicted_fly_ash + item.predicted_water + item.predicted_superplasticizer + item.predicted_coarse_aggregate + item.predicted_fine_aggregate;
+              return <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3">{item.strength_input}</td><td>{toFraction(item.predicted_cement, total)}</td><td>{toFraction(item.predicted_water, total)}</td><td>{new Date(item.created_at).toLocaleString()}</td></tr>
+            })}</tbody>
           </table>
         </div>
       </Card>

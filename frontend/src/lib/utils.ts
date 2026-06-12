@@ -9,8 +9,8 @@ export function formatNumber(value: number) {
   return new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(value);
 }
 
-export function toRatio(value: number, cement: number) {
-  return cement > 0 ? (value / cement).toFixed(3) : "0.000";
+export function toFraction(value: number, total: number) {
+  return total > 0 ? (value / total).toFixed(3) : "0.000";
 }
 
 export function historyToPrediction(item: import("../types/api").HistoryItem) {
