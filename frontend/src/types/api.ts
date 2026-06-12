@@ -24,7 +24,6 @@ export type Prediction = {
   superplasticizer: number;
   coarse_aggregate: number;
   fine_aggregate: number;
-  age: number;
   created_at?: string;
 };
 
@@ -39,7 +38,5 @@ export type HistoryItem = {
   predicted_superplasticizer: number;
   predicted_coarse_aggregate: number;
   predicted_fine_aggregate: number;
-  predicted_age: number;
   created_at: string;
 };
-

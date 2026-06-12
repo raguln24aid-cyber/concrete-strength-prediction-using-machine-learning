@@ -31,7 +31,6 @@ By entering a target compressive strength, users receive predictions for:
 * Superplasticizer
 * Coarse Aggregate
 * Fine Aggregate
-* Age
 
 This transforms a traditionally time-consuming engineering workflow into a fast and intelligent decision-support system.
 

@@ -16,7 +16,6 @@ const labels: Record<string, string> = {
   superplasticizer: "Superplasticizer",
   coarse_aggregate: "Coarse Aggregate",
   fine_aggregate: "Fine Aggregate",
-  age: "Age"
 };
 
 export default function PredictionPage() {
@@ -63,4 +62,3 @@ export default function PredictionPage() {
     </div>
   );
 }
-

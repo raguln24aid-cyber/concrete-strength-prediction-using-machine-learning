@@ -10,7 +10,6 @@ def history_to_response(item: dict) -> dict:
         "predicted_superplasticizer": item["predicted_superplasticizer"],
         "predicted_coarse_aggregate": item["predicted_coarse_aggregate"],
         "predicted_fine_aggregate": item["predicted_fine_aggregate"],
-        "predicted_age": item["predicted_age"],
         "created_at": item["created_at"],
     }
 

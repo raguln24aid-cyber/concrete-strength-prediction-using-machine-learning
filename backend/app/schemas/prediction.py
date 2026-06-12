@@ -14,7 +14,6 @@ class PredictionOutput(BaseModel):
     superplasticizer: float
     coarse_aggregate: float
     fine_aggregate: float
-    age: float
 
 
 class PredictionResponse(PredictionOutput):
@@ -34,6 +33,5 @@ class HistoryResponse(BaseModel):
     predicted_superplasticizer: float
     predicted_coarse_aggregate: float
     predicted_fine_aggregate: float
-    predicted_age: float
     created_at: datetime
 

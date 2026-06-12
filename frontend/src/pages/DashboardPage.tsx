@@ -22,12 +22,11 @@ export default function DashboardPage() {
         <h2 className="mb-4 font-bold">Recent Predictions</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="text-slate-500"><tr><th className="py-2">Strength</th><th>Cement</th><th>Water</th><th>Age</th><th>Date</th></tr></thead>
-            <tbody>{history.slice(0, 6).map((item) => <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3">{item.strength_input}</td><td>{item.predicted_cement}</td><td>{item.predicted_water}</td><td>{item.predicted_age}</td><td>{new Date(item.created_at).toLocaleString()}</td></tr>)}</tbody>
+            <thead className="text-slate-500"><tr><th className="py-2">Strength</th><th>Cement</th><th>Water</th><th>Date</th></tr></thead>
+            <tbody>{history.slice(0, 6).map((item) => <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3">{item.strength_input}</td><td>{item.predicted_cement}</td><td>{item.predicted_water}</td><td>{new Date(item.created_at).toLocaleString()}</td></tr>)}</tbody>
           </table>
         </div>
       </Card>
     </div>
   );
 }
-

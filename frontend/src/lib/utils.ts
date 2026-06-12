@@ -18,7 +18,5 @@ export function historyToPrediction(item: import("../types/api").HistoryItem) {
     superplasticizer: item.predicted_superplasticizer,
     coarse_aggregate: item.predicted_coarse_aggregate,
     fine_aggregate: item.predicted_fine_aggregate,
-    age: item.predicted_age
   };
 }
-

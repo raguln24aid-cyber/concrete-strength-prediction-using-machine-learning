@@ -36,7 +36,7 @@ export default function LandingPage() {
               <span className="font-semibold">Prediction Snapshot</span>
               <BarChart3 className="text-cyan-300" />
             </div>
-            {["Cement 350 kg/m3", "Water 180 kg/m3", "Coarse Aggregate 1050 kg/m3", "Age 28 days"].map((item, index) => (
+            {["Cement 350 kg/m3", "Water 180 kg/m3", "Coarse Aggregate 1050 kg/m3"].map((item, index) => (
               <div key={item} className="mb-3">
                 <div className="mb-1 flex justify-between text-sm"><span>{item}</span><span>{84 - index * 11}%</span></div>
                 <div className="h-2 rounded-full bg-white/10"><div className="h-2 rounded-full bg-cyan-400" style={{ width: `${84 - index * 11}%` }} /></div>
@@ -57,4 +57,3 @@ export default function LandingPage() {
     </div>
   );
 }
-

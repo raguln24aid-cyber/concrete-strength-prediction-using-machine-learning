@@ -21,7 +21,6 @@ class HistoryService:
             "predicted_superplasticizer": prediction["superplasticizer"],
             "predicted_coarse_aggregate": prediction["coarse_aggregate"],
             "predicted_fine_aggregate": prediction["fine_aggregate"],
-            "predicted_age": prediction["age"],
             "created_at": datetime.now(timezone.utc),
         }
         await self.db.prediction_history.insert_one(doc)

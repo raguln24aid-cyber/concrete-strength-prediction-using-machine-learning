@@ -17,7 +17,6 @@ OUTPUT_COLUMNS = [
     "Superplasticizer",
     "Coarse Aggregate",
     "Fine Aggregate",
-    "Age",
 ]
 
 
@@ -42,7 +41,6 @@ class ModelService:
             "superplasticizer": round(float(prediction[4]), 3),
             "coarse_aggregate": round(float(prediction[5]), 3),
             "fine_aggregate": round(float(prediction[6]), 3),
-            "age": round(float(prediction[7]), 3),
         }
 
 
