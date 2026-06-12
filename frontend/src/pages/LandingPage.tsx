@@ -36,7 +36,7 @@ export default function LandingPage() {
               <span className="font-semibold">Prediction Snapshot</span>
               <BarChart3 className="text-cyan-300" />
             </div>
-            {["Cement 350 kg/m3", "Water 180 kg/m3", "Coarse Aggregate 1050 kg/m3"].map((item, index) => (
+            {["Cement Ratio 1.000", "Water Ratio 0.514", "Coarse Agg. Ratio 3.000"].map((item, index) => (
               <div key={item} className="mb-3">
                 <div className="mb-1 flex justify-between text-sm"><span>{item}</span><span>{84 - index * 11}%</span></div>
                 <div className="h-2 rounded-full bg-white/10"><div className="h-2 rounded-full bg-cyan-400" style={{ width: `${84 - index * 11}%` }} /></div>
@@ -49,7 +49,7 @@ export default function LandingPage() {
         {features.map((feature) => <Card key={feature.title}><feature.icon className="mb-4 text-cyan-600" /><h2 className="font-bold">{feature.title}</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{feature.text}</p></Card>)}
       </section>
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-10 lg:grid-cols-3">
-        <Card><h2 className="font-bold">About Model</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Multi-output regression trained from concrete compressive strength observations to estimate seven mix variables.</p></Card>
+        <Card><h2 className="font-bold">About Model</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Multi-output regression trained from concrete compressive strength observations to estimate seven mix ingredient ratios.</p></Card>
         <Card><h2 className="font-bold">Technology Stack</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">FastAPI, MongoDB Motor, React, Vite, TypeScript, Tailwind, TanStack Query, Docker, and CI checks.</p></Card>
         <Card><h2 className="font-bold">Teams Love It</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">A clean workflow for lab teams, civil engineers, data scientists, and operations leaders.</p></Card>
       </section>

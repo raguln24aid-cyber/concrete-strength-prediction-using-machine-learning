@@ -5,7 +5,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { WandSparkles } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { api } from "../lib/api";
-import { formatNumber } from "../lib/utils";
+import { formatNumber, toRatio } from "../lib/utils";
 import type { Prediction } from "../types/api";
 
 const labels: Record<string, string> = {
@@ -36,7 +36,10 @@ export default function PredictionPage() {
     mutation.mutate();
   }
 
-  const chartData = result ? Object.entries(result).filter(([key]) => labels[key]).map(([key, value]) => ({ name: labels[key], value: Number(value) })) : [];
+  const chartData = result ? Object.entries(result).filter(([key]) => labels[key]).map(([key, value]) => ({ 
+    name: labels[key], 
+    value: result.cement > 0 ? (Number(value) / Number(result.cement)) : 0 
+  })) : [];
 
   return (
     <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
@@ -52,11 +55,11 @@ export default function PredictionPage() {
       <div className="space-y-5">
         {result && (
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {Object.entries(labels).map(([key, label]) => <Card key={key}><p className="text-sm text-slate-500">{label}</p><p className="mt-2 text-2xl font-black">{formatNumber(Number(result[key as keyof Prediction]))}</p></Card>)}
+            {Object.entries(labels).map(([key, label]) => <Card key={key}><p className="text-sm text-slate-500">{label} Ratio</p><p className="mt-2 text-2xl font-black">{toRatio(Number(result[key as keyof Prediction]), Number(result.cement))}</p></Card>)}
           </motion.div>
         )}
         <Card className="min-h-[360px]">
-          <h2 className="mb-4 font-bold">Prediction Chart</h2>
+          <h2 className="mb-4 font-bold">Prediction Ratios (Relative to Cement)</h2>
           {result ? <ResponsiveContainer width="100%" height={280}><BarChart data={chartData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis /><Tooltip /><Bar dataKey="value" fill="#0891b2" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer> : <div className="grid h-64 place-items-center text-slate-500">Run a prediction to view results.</div>}
         </Card>
       </div>
