@@ -19,11 +19,11 @@ const labels: Record<string, string> = {
 };
 
 export default function PredictionPage() {
-  const [strength, setStrength] = useState(40);
+  const [strength, setStrength] = useState<number | "">(40);
   const [result, setResult] = useState<Prediction | null>(null);
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: async () => (await api.post<Prediction>("/api/predict", { strength })).data,
+    mutationFn: async () => (await api.post<Prediction>("/api/predict", { strength: Number(strength) })).data,
     onSuccess(data) {
       setResult(data);
       queryClient.invalidateQueries({ queryKey: ["history"] });
@@ -32,6 +32,7 @@ export default function PredictionPage() {
 
   function submit(event: FormEvent) {
     event.preventDefault();
+    if (strength === "") return;
     mutation.mutate();
   }
 
@@ -43,8 +44,8 @@ export default function PredictionPage() {
         <h1 className="text-2xl font-black">Predict Mix</h1>
         <form onSubmit={submit} className="mt-6 space-y-4">
           <label className="text-sm font-semibold">Target Strength</label>
-          <input className="input" type="number" min="1" max="150" step="0.1" value={strength} onChange={(e) => setStrength(Number(e.target.value))} />
-          <button className="btn-primary w-full" disabled={mutation.isPending}>{mutation.isPending ? "Predicting..." : <>Predict <WandSparkles size={16} /></>}</button>
+          <input className="input" type="number" min="1" max="150" step="0.1" value={strength} onChange={(e) => setStrength(e.target.value === "" ? "" : Number(e.target.value))} />
+          <button className="btn-primary w-full" disabled={mutation.isPending || strength === ""}>{mutation.isPending ? "Predicting..." : <>Predict <WandSparkles size={16} /></>}</button>
         </form>
         {mutation.isError && <p className="mt-4 text-sm text-red-600">Prediction failed. Confirm the backend and MongoDB are running.</p>}
       </Card>
