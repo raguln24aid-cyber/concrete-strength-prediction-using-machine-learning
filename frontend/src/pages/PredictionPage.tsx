@@ -40,7 +40,7 @@ export default function PredictionPage() {
 
   const chartData = result ? Object.entries(result).filter(([key]) => labels[key]).map(([key, value]) => ({ 
     name: labels[key], 
-    value: total > 0 ? (Number(value) / total) : 0 
+    value: Number(value) 
   })) : [];
 
   return (
@@ -57,11 +57,11 @@ export default function PredictionPage() {
       <div className="space-y-5">
         {result && (
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {Object.entries(labels).map(([key, label]) => <Card key={key}><p className="text-sm text-slate-500">{label} Fraction</p><p className="mt-2 text-2xl font-black">{toFraction(Number(result[key as keyof Prediction]), total)}</p></Card>)}
+            {Object.entries(labels).map(([key, label]) => <Card key={key}><p className="text-sm text-slate-500">{label} (kg/m³)</p><p className="mt-2 text-2xl font-black">{formatNumber(Number(result[key as keyof Prediction]))}</p></Card>)}
           </motion.div>
         )}
         <Card className="min-h-[360px]">
-          <h2 className="mb-4 font-bold">Ingredient Weight Fractions (Sum = 1.0)</h2>
+          <h2 className="mb-4 font-bold">Ingredient Weights (kg/m³)</h2>
           {result ? <ResponsiveContainer width="100%" height={280}><BarChart data={chartData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis /><Tooltip /><Bar dataKey="value" fill="#0891b2" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer> : <div className="grid h-64 place-items-center text-slate-500">Run a prediction to view results.</div>}
         </Card>
       </div>

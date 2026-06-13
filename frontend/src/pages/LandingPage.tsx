@@ -21,7 +21,7 @@ export default function LandingPage() {
       </nav>
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="max-w-4xl text-5xl font-black leading-tight tracking-normal md:text-7xl">ConcreteMix AI</h1>
+          <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">ConcreteMix AI</h1>
           <p className="mt-5 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             A production-ready AI application that converts desired concrete strength into an actionable ingredient mix with secure history tracking.
           </p>
@@ -36,7 +36,7 @@ export default function LandingPage() {
               <span className="font-semibold">Prediction Snapshot</span>
               <BarChart3 className="text-cyan-300" />
             </div>
-            {["Cement Fraction 0.222", "Water Fraction 0.114", "Coarse Agg. Fraction 0.664"].map((item, index) => (
+            {["Cement 340 kg/m³", "Water 185 kg/m³", "Coarse Agg. 1040 kg/m³"].map((item, index) => (
               <div key={item} className="mb-3">
                 <div className="mb-1 flex justify-between text-sm"><span>{item}</span><span>{84 - index * 11}%</span></div>
                 <div className="h-2 rounded-full bg-white/10"><div className="h-2 rounded-full bg-cyan-400" style={{ width: `${84 - index * 11}%` }} /></div>
