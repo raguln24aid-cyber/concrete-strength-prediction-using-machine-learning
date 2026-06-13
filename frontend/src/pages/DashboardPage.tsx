@@ -22,8 +22,15 @@ export default function DashboardPage() {
       <Card>
         <h2 className="mb-4 font-bold">Recent Predictions</h2>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[600px] text-left text-sm">
-            <thead className="text-slate-500"><tr><th className="py-2">Strength (MPa)</th><th>Cement (kg/m³)</th><th>Water (kg/m³)</th><th>Date</th></tr></thead>
+          <table className="w-full min-w-[700px] text-left text-sm">
+            <thead className="text-slate-500">
+              <tr>
+                <th className="py-3 font-semibold">Strength (MPa)</th>
+                <th className="font-semibold">Cement (kg/m³)</th>
+                <th className="font-semibold">Water (kg/m³)</th>
+                <th className="font-semibold">Date</th>
+              </tr>
+            </thead>
             <tbody>{history.slice(0, 6).map((item) => {
               return <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3 font-semibold text-cyan-700 dark:text-cyan-400">{item.strength_input}</td><td>{formatNumber(item.predicted_cement)}</td><td>{formatNumber(item.predicted_water)}</td><td>{new Date(item.created_at).toLocaleString()}</td></tr>
             })}</tbody>

@@ -48,11 +48,19 @@ export default function HistoryPage() {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
-          <thead className="text-slate-500"><tr><th className="py-2">Strength</th><th>Cement Frac.</th><th>Slag Frac.</th><th>Fly Ash Frac.</th><th>Water Frac.</th><th></th></tr></thead>
-          <thead className="text-slate-500"><tr><th className="py-2">Strength (MPa)</th><th>Cement</th><th>Slag</th><th>Fly Ash</th><th>Water</th><th></th></tr></thead>
+        <table className="w-full min-w-[800px] text-left text-sm">
+          <thead className="text-slate-500 border-b border-slate-200 dark:border-slate-800">
+            <tr>
+              <th className="py-3 font-semibold">Strength (MPa)</th>
+              <th className="font-semibold">Cement (kg/m³)</th>
+              <th className="font-semibold">Slag (kg/m³)</th>
+              <th className="font-semibold">Fly Ash (kg/m³)</th>
+              <th className="font-semibold">Water (kg/m³)</th>
+              <th className="w-10"></th>
+            </tr>
+          </thead>
           <tbody>{pageItems.map((item) => {
-            return <tr key={item.id} className="border-t border-slate-200/70 dark:border-slate-800"><td className="py-3 font-semibold">{item.strength_input}</td><td>{formatNumber(item.predicted_cement)}</td><td>{formatNumber(item.predicted_blast_furnace_slag)}</td><td>{formatNumber(item.predicted_fly_ash)}</td><td>{formatNumber(item.predicted_water)}</td><td><button className="btn-secondary size-9 px-0" onClick={() => deleteMutation.mutate(item.id)} aria-label="Delete"><Trash2 size={15} /></button></td></tr>
+            return <tr key={item.id} className="border-b border-slate-200/70 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"><td className="py-4 font-semibold text-cyan-700 dark:text-cyan-400">{item.strength_input}</td><td>{formatNumber(item.predicted_cement)}</td><td>{formatNumber(item.predicted_blast_furnace_slag)}</td><td>{formatNumber(item.predicted_fly_ash)}</td><td>{formatNumber(item.predicted_water)}</td><td><button className="btn-secondary size-9 px-0 hover:text-red-600" onClick={() => deleteMutation.mutate(item.id)} aria-label="Delete"><Trash2 size={15} /></button></td></tr>
           })}</tbody>
         </table>
       </div>
