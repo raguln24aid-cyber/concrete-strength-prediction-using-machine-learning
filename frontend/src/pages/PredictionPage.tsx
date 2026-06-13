@@ -5,7 +5,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { WandSparkles } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { api } from "../lib/api";
-import { formatNumber, toFraction } from "../lib/utils";
+import { formatNumber } from "../lib/utils";
 import type { Prediction } from "../types/api";
 
 const labels: Record<string, string> = {
@@ -35,8 +35,6 @@ export default function PredictionPage() {
     if (strength === "") return;
     mutation.mutate();
   }
-
-  const total = result ? (result.cement + result.blast_furnace_slag + result.fly_ash + result.water + result.superplasticizer + result.coarse_aggregate + result.fine_aggregate) : 0;
 
   const chartData = result ? Object.entries(result).filter(([key]) => labels[key]).map(([key, value]) => ({ 
     name: labels[key], 

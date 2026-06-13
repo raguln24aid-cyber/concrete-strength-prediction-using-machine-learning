@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { Activity, History, Home, LogOut, Moon, Sun, User, WandSparkles } from "lucide-react";
+import { Activity, History, Home, LogOut, Menu, Moon, Sun, User, WandSparkles, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { cn } from "../../lib/utils";
@@ -15,6 +15,7 @@ export function AppLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [dark, setDark] = useState(() => localStorage.getItem("theme") === "dark");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -37,6 +38,10 @@ export function AppLayout() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <button className="btn-secondary size-10 px-0 md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
             <button className="btn-secondary size-10 px-0" onClick={() => setDark((v) => !v)} aria-label="Toggle theme">
               {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
@@ -45,6 +50,19 @@ export function AppLayout() {
             </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <div className="border-t border-slate-200 dark:border-slate-800 bg-white/95 p-4 backdrop-blur-xl dark:bg-slate-950/95 md:hidden">
+            <nav className="flex flex-col gap-1">
+              {nav.map((item) => (
+                <NavLink key={item.to} to={item.to} onClick={() => setIsMenuOpen(false)} className={({ isActive }) => cn("flex items-center gap-3 rounded-md px-3 py-3 text-sm font-medium", isActive ? "bg-cyan-600 text-white" : "hover:bg-slate-100 dark:hover:bg-slate-800")}>
+                  <item.icon size={18} /> {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        )}
       </header>
       <main className="mx-auto max-w-7xl px-4 py-7">
         <div className="mb-6">
@@ -55,4 +73,3 @@ export function AppLayout() {
     </div>
   );
 }
-
