@@ -11,7 +11,11 @@ const features = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50/50 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
+      {/* Decorative Background Blobs */}
+      <div className="absolute -left-20 -top-20 size-96 rounded-full bg-cyan-500/10 blur-3xl" />
+      <div className="absolute -right-20 top-1/2 size-96 rounded-full bg-blue-500/10 blur-3xl" />
+
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5">
         <Link to="/" className="text-xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">ConcreteMix AI</Link>
         <div className="flex gap-2">
@@ -30,7 +34,7 @@ export default function LandingPage() {
             <Link className="btn-secondary" to="/login">Open Dashboard</Link>
           </div>
         </motion.div>
-        <Card className="p-4">
+        <Card className="p-4 backdrop-blur-md bg-white/40 dark:bg-white/5 border-white/20">
           <div className="rounded-md bg-slate-950 p-5 text-white">
             <div className="mb-5 flex items-center justify-between">
               <span className="font-semibold">Prediction Snapshot</span>

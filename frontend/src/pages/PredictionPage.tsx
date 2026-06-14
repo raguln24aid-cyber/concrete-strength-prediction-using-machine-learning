@@ -9,13 +9,13 @@ import { formatNumber } from "../lib/utils";
 import type { Prediction } from "../types/api";
 
 const ingredientMeta: Record<string, { label: string; color: string; border: string }> = {
-  cement: { label: "Cement", color: "text-cyan-600", border: "border-l-cyan-500" },
-  blast_furnace_slag: { label: "Slag", color: "text-blue-600", border: "border-l-blue-500" },
-  fly_ash: { label: "Fly Ash", color: "text-indigo-600", border: "border-l-indigo-500" },
-  water: { label: "Water", color: "text-sky-600", border: "border-l-sky-500" },
-  superplasticizer: { label: "Superplasticizer", color: "text-violet-600", border: "border-l-violet-500" },
-  coarse_aggregate: { label: "Coarse Aggregate", color: "text-emerald-600", border: "border-l-emerald-500" },
-  fine_aggregate: { label: "Fine Aggregate", color: "text-teal-600", border: "border-l-teal-500" },
+  cement: { label: "Cement", color: "text-cyan-600", border: "bg-cyan-500" },
+  blast_furnace_slag: { label: "Slag", color: "text-blue-600", border: "bg-blue-500" },
+  fly_ash: { label: "Fly Ash", color: "text-indigo-600", border: "bg-indigo-500" },
+  water: { label: "Water", color: "text-sky-600", border: "bg-sky-500" },
+  superplasticizer: { label: "Superplasticizer", color: "text-violet-600", border: "bg-violet-500" },
+  coarse_aggregate: { label: "Coarse Aggregate", color: "text-emerald-600", border: "bg-emerald-500" },
+  fine_aggregate: { label: "Fine Aggregate", color: "text-teal-600", border: "bg-teal-500" },
 };
 
 const CHART_COLORS = ["#0891b2", "#2563eb", "#4f46e5", "#0ea5e9", "#7c3aed", "#059669", "#0d9488"];
@@ -58,14 +58,16 @@ export default function PredictionPage() {
         {result && (
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(ingredientMeta).map(([key, meta]) => (
-              <Card key={key} className={`border-l-4 ${meta.border}`}>
+              <Card key={key} className="relative overflow-hidden group">
+                <div className={`absolute left-0 top-0 h-full w-1 ${meta.border}`} />
                 <p className={`text-sm font-medium ${meta.color}`}>{meta.label} (kg/m³)</p>
-                <p className="mt-2 text-2xl font-black">{formatNumber(Number(result[key as keyof Prediction]))}</p>
+                <p className="mt-2 text-2xl font-black group-hover:scale-105 transition-transform origin-left">{formatNumber(Number(result[key as keyof Prediction]))}</p>
               </Card>
             ))}
           </motion.div>
         )}
-        <Card className="min-h-[360px]">
+        <Card className="min-h-[360px] relative overflow-hidden">
+          <div className="absolute -right-20 -top-20 size-64 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none" />
           <h2 className="mb-4 font-bold">Ingredient Weights (kg/m³)</h2>
           {result ? (
             <ResponsiveContainer width="100%" height={280}>

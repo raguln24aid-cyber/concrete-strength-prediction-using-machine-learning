@@ -28,9 +28,12 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center px-4 text-slate-950 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950 dark:text-slate-100">
+    <main className="relative grid min-h-screen overflow-hidden place-items-center px-4 text-slate-950 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950 dark:text-slate-100">
+      <div className="absolute top-1/4 -left-20 size-80 rounded-full bg-indigo-400/20 blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 -right-20 size-80 rounded-full bg-cyan-400/20 blur-3xl animate-pulse" />
+
       <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <Card>
+        <Card className="backdrop-blur-xl bg-white/60 dark:bg-slate-900/60 border-white/40 dark:border-white/10 shadow-2xl">
           <h1 className="text-2xl font-black bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent">Create account</h1>
           <form onSubmit={submit} className="mt-6 space-y-4">
             <input className="input" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} minLength={2} required />
