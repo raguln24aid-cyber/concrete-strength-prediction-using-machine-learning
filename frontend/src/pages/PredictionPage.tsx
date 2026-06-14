@@ -1,22 +1,24 @@
 import { FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { WandSparkles } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { api } from "../lib/api";
 import { formatNumber } from "../lib/utils";
 import type { Prediction } from "../types/api";
 
-const labels: Record<string, string> = {
-  cement: "Cement",
-  blast_furnace_slag: "Slag",
-  fly_ash: "Fly Ash",
-  water: "Water",
-  superplasticizer: "Superplasticizer",
-  coarse_aggregate: "Coarse Aggregate",
-  fine_aggregate: "Fine Aggregate",
+const ingredientMeta: Record<string, { label: string; color: string; border: string }> = {
+  cement: { label: "Cement", color: "text-cyan-600", border: "border-l-cyan-500" },
+  blast_furnace_slag: { label: "Slag", color: "text-blue-600", border: "border-l-blue-500" },
+  fly_ash: { label: "Fly Ash", color: "text-indigo-600", border: "border-l-indigo-500" },
+  water: { label: "Water", color: "text-sky-600", border: "border-l-sky-500" },
+  superplasticizer: { label: "Superplasticizer", color: "text-violet-600", border: "border-l-violet-500" },
+  coarse_aggregate: { label: "Coarse Aggregate", color: "text-emerald-600", border: "border-l-emerald-500" },
+  fine_aggregate: { label: "Fine Aggregate", color: "text-teal-600", border: "border-l-teal-500" },
 };
+
+const CHART_COLORS = ["#0891b2", "#2563eb", "#4f46e5", "#0ea5e9", "#7c3aed", "#059669", "#0d9488"];
 
 export default function PredictionPage() {
   const [strength, setStrength] = useState<number | "">(40);
@@ -36,8 +38,8 @@ export default function PredictionPage() {
     mutation.mutate();
   }
 
-  const chartData = result ? Object.entries(result).filter(([key]) => labels[key]).map(([key, value]) => ({ 
-    name: labels[key], 
+  const chartData = result ? Object.entries(result).filter(([key]) => ingredientMeta[key]).map(([key, value]) => ({ 
+    name: ingredientMeta[key].label, 
     value: Number(value) 
   })) : [];
 
@@ -55,12 +57,33 @@ export default function PredictionPage() {
       <div className="space-y-5">
         {result && (
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {Object.entries(labels).map(([key, label]) => <Card key={key}><p className="text-sm text-slate-500">{label} (kg/m³)</p><p className="mt-2 text-2xl font-black">{formatNumber(Number(result[key as keyof Prediction]))}</p></Card>)}
+            {Object.entries(ingredientMeta).map(([key, meta]) => (
+              <Card key={key} className={`border-l-4 ${meta.border}`}>
+                <p className={`text-sm font-medium ${meta.color}`}>{meta.label} (kg/m³)</p>
+                <p className="mt-2 text-2xl font-black">{formatNumber(Number(result[key as keyof Prediction]))}</p>
+              </Card>
+            ))}
           </motion.div>
         )}
         <Card className="min-h-[360px]">
           <h2 className="mb-4 font-bold">Ingredient Weights (kg/m³)</h2>
-          {result ? <ResponsiveContainer width="100%" height={280}><BarChart data={chartData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis /><Tooltip /><Bar dataKey="value" fill="#0891b2" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer> : <div className="grid h-64 place-items-center text-slate-500">Run a prediction to view results.</div>}
+          {result ? (
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis dataKey="name" tick={{ fontSize: 11 }} />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                  {chartData.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="grid h-64 place-items-center text-slate-500">Run a prediction to view results.</div>
+          )}
         </Card>
       </div>
     </div>

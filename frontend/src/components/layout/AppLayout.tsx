@@ -23,12 +23,12 @@ export function AppLayout() {
   }, [dark]);
 
   return (
-    <div className="min-h-screen text-slate-950 dark:text-slate-100">
-      <header className="sticky top-0 z-20 border-b border-white/40 bg-white/70 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
+    <div className="min-h-screen bg-slate-50/30 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
+      <header className="sticky top-0 z-20 border-b-2 border-transparent bg-white/70 backdrop-blur-xl dark:bg-slate-950/70 [border-image:linear-gradient(to_right,transparent,#0891b2,transparent)1]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
           <Link to="/dashboard" className="flex items-center gap-2 font-bold">
-            <span className="grid size-9 place-items-center rounded-md bg-cyan-600 text-white"><Activity size={18} /></span>
-            ConcreteMix AI
+            <span className="grid size-9 place-items-center rounded-md bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20"><Activity size={18} /></span>
+            <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">ConcreteMix AI</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((item) => (

@@ -29,10 +29,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center px-4 text-slate-950 dark:text-slate-100">
+    <main className="grid min-h-screen place-items-center px-4 text-slate-950 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 dark:text-slate-100">
       <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <Card>
-          <h1 className="text-2xl font-black">Welcome back</h1>
+          <h1 className="text-2xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Welcome back</h1>
           <p className="mt-1 text-sm text-slate-500">Login to continue to ConcreteMix AI.</p>
           <form onSubmit={submit} className="mt-6 space-y-4">
             <input className="input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -53,4 +53,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
